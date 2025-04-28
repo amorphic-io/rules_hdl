@@ -1,7 +1,8 @@
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("//dependency_support/com_google_skywater_pdk:cell_libraries.bzl", "CELL_LIBRARIES")
 
-def _pdk_impl(module_ctx):
+def _hdl_ext_impl(module_ctx):
     root_direct_deps = []
     root_direct_dev_deps = []
     pdk_repo_names = {}
@@ -35,6 +36,18 @@ declare_cell_library("{}", "{}")
                         ],
                     )
 
+    # Expose the internal repos so that third parties can access them.
+    http_archive(
+        name = "com_icarus_iverilog",
+        build_file = "//dependency_support:com_icarus_iverilog/bundled.BUILD.bazel",
+        sha256 = "a68cb1ef7c017ef090ebedb2bc3e39ef90ecc70a3400afb4aa94303bc3beaa7d",
+        strip_prefix = "iverilog-12_0",
+        urls = [
+            "https://github.com/steveicarus/iverilog/archive/v12_0.tar.gz",
+        ],
+    )
+    root_direct_deps.append("com_icarus_iverilog")
+
     return module_ctx.extension_metadata(
         root_module_direct_deps = root_direct_deps,
         root_module_direct_dev_deps = root_direct_dev_deps,
@@ -53,7 +66,7 @@ The name must be unique within the set of names registered by this extension.
 }
 
 hdl_ext = module_extension(
-    implementation = _pdk_impl,
+    implementation = _hdl_ext_impl,
     tag_classes = {
         "pdk": tag_class(
             attrs = _PDK_TAG_ATTRS,
