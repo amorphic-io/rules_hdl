@@ -34,7 +34,7 @@ def benchmark(ctx, open_road_info):
 
     open_road_commands = [
         est_parasitic_cmd,
-        "set_power_activity -input -activity {} -duty 0.5".format(ctx.attr.power_switching_activity),
+        #"set_power_activity -input -activity {} -duty 0.5".format(ctx.attr.power_switching_activity),
         "report_power",
         "report_wns",
         "report_tns",

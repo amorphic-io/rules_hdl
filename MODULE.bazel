@@ -194,3 +194,20 @@ use_repo(hdl, "org_theopenroadproject_asap7_pdk")
 use_repo(hdl, "org_theopenroadproject_asap7_pdk_sc7p5t_28")
 use_repo(hdl, "org_theopenroadproject_asap7_pdk_sc6t_26")
 use_repo(hdl, "org_theopenroadproject_asap7_pdk_sc7p5t_27")
+
+hdl.gf_pdk(
+    name = "com_google_gf180mcu_pdk",
+    libraries = [
+        "gf180mcu_fd_bd_sram",
+        "gf180mcu_fd_io",
+        "gf180mcu_fd_pr",
+        "gf180mcu_fd_sc_mcu7t5v0",
+        "gf180mcu_fd_sc_mcu9t5v0",
+    ],
+)
+
+use_repo(hdl, "com_google_gf180mcu_pdk_gf180mcu_fd_bd_sram")
+use_repo(hdl, "com_google_gf180mcu_pdk_gf180mcu_fd_io")
+use_repo(hdl, "com_google_gf180mcu_pdk_gf180mcu_fd_pr")
+use_repo(hdl, "com_google_gf180mcu_pdk_gf180mcu_mcu7t5v0")
+use_repo(hdl, "com_google_gf180mcu_pdk_gf180mcu_mcu9t5v0")
